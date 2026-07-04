@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dynamic Smart Network & Web Mapping Engine</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #0f111a; color: #cdd1de; font-family: 'Segoe UI', sans-serif; }
+        .card-custom { background-color: #161925; border: 1px solid #252b41; border-radius: 10px; }
+        .ledger-item { background-color: #1e2335; border-left: 4px solid #10b981; cursor: pointer; transition: 0.2s; }
+        .ledger-item:hover { background-color: #262c43; }
+        .badge-danger { background-color: #ef4444; }
+        .badge-warning { background-color: #f97316; }
+    </style>
+</head>
+<body class="p-4">
+    <div class="container-fluid">
+        <header class="d-flex justify-content-between align-items-center mb-4 pb-2 border-bottom border-secondary">
+            <h2 class="text-white fw-bold">🛡️ Network Auditing & Wi-Fi Subnet Scanner</h2>
+            <span class="badge bg-primary px-3 py-2">Wi-Fi + LAN Discovery Enabled</span>
+        </header>
+        
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card card-custom p-4 mb-4">
+                    <h5 class="text-info fw-bold mb-3">Target Scope Setup</h5>
+                    <div class="mb-3">
+                        <label class="form-label small text-muted">Detected Active Connections</label>
+                        <select id="interfaceSelect" class="form-select bg-dark text-white border-secondary" onchange="autofillSubnet()">
+                            <option value="">-- Direct Target Manual Input --</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label small text-muted">Target IP or Subnet Range (CIDR)</label>
+                        <input type="text" id="targetIp" class="form-control bg-dark text-white border-secondary" placeholder="e.g., 192.168.1.1 or 192.168.1.0/24">
+                    </div>
+                    <button id="launchBtn" onclick="executeScan()" class="btn btn-primary w-100 fw-bold">Launch Full Audit Sweep</button>
+                </div>
+                <div class="card card-custom p-4">
+                    <h5 class="text-white-50 fw-bold mb-3">Discovered Asset History</h5>
+                    <div id="scanLedgerContainer" style="max-height: 350px; overflow-y: auto;"></div>
+                </div>
+            </div>
+
+            <div class="col-md-8">
+                <div class="card card-custom p-4 mb-4">
+                    <h5 class="text-white fw-bold mb-3">Discovered Port Surface State</h5>
+                    <div class="table-responsive">
+                        <table class="table table-dark table-hover">
+                            <thead>
+                                <tr><th>Port</th><th>Protocol</th><th>State</th><th>Service Banner Mapping</th></tr>
+                            </thead>
+                            <tbody id="portTableBody">
+                                <tr><td colspan="4" class="text-center text-muted">Enter a target IP above or select an inventory entry.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card card-custom p-4 mb-4" style="min-height: 280px;">
+                            <h5 class="text-warning fw-bold mb-3">Threat Vulnerabilities (CVE/ZAP)</h5>
+                            <div id="cveOutputContainer" class="list-group list-group-flush bg-transparent"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card card-custom p-4 mb-4" style="min-height: 280px;">
+                            <h5 class="text-danger fw-bold mb-3">Available Public Exploit Paths</h5>
+                            <div id="exploitOutputContainer" class="list-group list-group-flush bg-transparent"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function discoverSystemNetworks() {
+            fetch('/api/interfaces')
+                .then(res => res.json())
+                .then(data => {
+                    const selector = document.getElementById('interfaceSelect');
+                    selector.innerHTML = '<option value="">-- Direct Target Manual Input --</option>';
+                    data.forEach(net => {
+                        const opt = document.createElement('option');
+                        opt.value = net.subnet;
+                        opt.innerText = `📡 ${net.type} [${net.interface}] -> ${net.subnet}`;
+                        selector.appendChild(opt);
+                    });
+                });
+        }
+
+        function autofillSubnet() {
+            const val = document.getElementById('interfaceSelect').value;
+            if(val) document.getElementById('targetIp').value = val;
+        }
+
+        function loadHistory() {
+            fetch('/api/history')
+                .then(res => res.json())
+                .then(data => {
+                    const container = document.getElementById('scanLedgerContainer');
+                    container.innerHTML = '';
+                    data.forEach(scan => {
+                        const div = document.createElement('div');
+                        div.className = 'ledger-item p-3 mb-2 rounded d-flex justify-content-between align-items-center';
+                        div.onclick = () => renderDetails(scan);
+                        div.innerHTML = `<div><strong class="text-white">${scan.target_ip}</strong><br><small class="text-muted">${scan.timestamp}</small></div><span class="badge bg-success">Stored</span>`;
+                        container.appendChild(div);
+                    });
+                });
+        }
+
+        function executeScan() {
+            const target = document.getElementById('targetIp').value.trim();
+            if(!target) return alert('Please enter a valid target IP or subnet range layout.');
+            
+            const btn = document.getElementById('launchBtn');
+            btn.disabled = true;
+            btn.innerText = "Analyzing Target Surface State (Please wait)...";
+
+            // Clear old values to give active feedback
+            document.getElementById('portTableBody').innerHTML = '<tr><td colspan="4" class="text-center text-info">Auditing system layers dynamically...</td></tr>';
+            document.getElementById('cveOutputContainer').innerHTML = '';
+            document.getElementById('exploitOutputContainer').innerHTML = '';
+
+            fetch('/api/scan', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ target: target })
+            })
+            .then(res => res.json())
+            .then(data => {
+                if(data.error) {
+                    alert(data.error);
+                    document.getElementById('portTableBody').innerHTML = '<tr><td colspan="4" class="text-center text-danger">Scan error encountered. Check background terminal logs.</td></tr>';
+                } else {
+                    loadHistory();
+                    renderDetails(data); // Immediately pushes real-time open ports/CVE output to the dashboard view!
+                }
+            })
+            .catch(err => {
+                console.error(err);
+                alert("Core server network disconnect error.");
+            })
+            .finally(() => {
+                btn.disabled = false;
+                btn.innerText = "Launch Full Audit Sweep";
+            });
+        }
+
+        function renderDetails(scan) {
+            const tbody = document.getElementById('portTableBody');
+            tbody.innerHTML = '';
+            
+            if(!scan.ports_services || scan.ports_services.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="4" class="text-center text-muted">No open listening service interfaces detected on this address profile.</td></tr>';
+            } else {
+                scan.ports_services.forEach(p => {
+                    tbody.innerHTML += `<tr><td><span class="badge bg-dark">${p.port}</span></td><td class="text-uppercase text-info font-monospace">${p.protocol}</td><td><span class="text-success">● ${p.state}</span></td><td class="fw-bold text-white">${p.service}</td></tr>`;
+                });
+            }
+
+            const cves = typeof scan.snmp_data === "string" ? JSON.parse(scan.snmp_data) : (scan.snmp_data || []);
+            const exploits = typeof scan.rpc_nfs_data === "string" ? JSON.parse(scan.rpc_nfs_data) : (scan.rpc_nfs_data || []);
+
+            const cveContainer = document.getElementById('cveOutputContainer');
+            cveContainer.innerHTML = '';
+            if(cves.length === 0) {
+                cveContainer.innerHTML = '<div class="text-muted small p-2">No critical software version vulnerabilities found.</div>';
+            } else {
+                cves.forEach(c => {
+                    let bClass = c.severity === "Critical" || c.severity === "High" || c.severity === "High Risk" ? "badge bg-danger" : "badge bg-warning";
+                    cveContainer.innerHTML += `
+                        <div class="border-bottom border-secondary py-2">
+                            <div class="d-flex justify-content-between"><span class="${bClass}">${c.id}</span><small class="text-muted">${c.severity}</small></div>
+                            <p class="small text-white-50 mt-1 mb-0">${c.summary}</p>
+                        </div>`;
+                });
+            }
+
+            const expContainer = document.getElementById('exploitOutputContainer');
+            expContainer.innerHTML = '';
+            if(exploits.length === 0) {
+                expContainer.innerHTML = '<div class="text-muted small p-2">No correlated public proof-of-concept vectors mapped.</div>';
+            } else {
+                exploits.forEach(e => {
+                    expContainer.innerHTML += `<div class="py-2 border-bottom border-secondary"><a href="${e.url}" target="_blank" class="text-info small fw-bold d-block">🔗 ${e.title}</a></div>`;
+                });
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            discoverSystemNetworks();
+            loadHistory();
+        });
+    </script>
+</body>
+</html>

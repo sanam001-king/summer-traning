@@ -1,0 +1,73 @@
+2026-06-20 12:06:40,670 [INFO] Dashboard web UI accessed.
+2026-06-20 12:06:51,781 [INFO] Target Initialization: Booting assessment framework for 112.196.22.36
+2026-06-20 12:07:32,136 [INFO] Dashboard web UI accessed.
+2026-06-20 12:08:25,882 [INFO] Assessment success: tracking profile updated for 112.196.22.36
+2026-06-20 13:07:04,826 [INFO] Dashboard web UI accessed.
+2026-06-20 13:20:53,864 [INFO] Dashboard web UI accessed.
+2026-06-20 13:22:32,295 [INFO] Initiating dynamic scan landscape mapping against rule block: 112.196.22.36
+2026-06-20 13:23:51,973 [INFO] Successfully evaluated network surface. Processed node count: 1
+2026-06-20 13:45:18,349 [INFO] [ENGINE] Starting combined network and OWASP ZAP web scan for target: 112.196.22.36
+2026-06-20 13:49:39,178 [INFO] [ENGINE] Starting combined network and OWASP ZAP web scan for target: 192.168.16.1
+2026-06-20 13:49:40,458 [INFO] [ENGINE] Starting combined network and OWASP ZAP web scan for target: 192.168.16.1
+2026-06-20 13:49:55,496 [INFO] [ENGINE] Starting combined network and OWASP ZAP web scan for target: 112.196.22.36
+2026-06-20 13:53:12,911 [INFO] [ENGINE] Launching infrastructure map execution against: 192.168.16.1
+2026-06-20 13:53:13,781 [INFO] [ENGINE] Launching infrastructure map execution against: 192.168.16.1
+2026-06-20 13:53:15,586 [INFO] [ENGINE] Launching infrastructure map execution against: 192.168.16.1
+2026-06-20 13:53:25,602 [INFO] [ENGINE] Launching infrastructure map execution against: 192.168.16.1
+2026-06-20 13:59:06,655 [INFO] [ENGINE] Launching infrastructure map execution against: 192.168.1.0/24
+2026-06-20 13:59:29,661 [INFO] [ENGINE] Launching infrastructure map execution against: 192.168.1./24
+2026-06-20 13:59:40,185 [INFO] [ENGINE] Launching infrastructure map execution against: 192.168.16.1
+2026-06-20 13:59:44,518 [INFO] [ENGINE] Launching infrastructure map execution against: 192.168.16.1/24
+2026-06-20 14:00:05,404 [INFO] [ENGINE] Launching infrastructure map execution against: 192.168.16.1/24
+2026-06-20 14:02:04,069 [INFO] [ENGINE] Launching infrastructure map execution against: 192.168.1.0/24
+2026-06-20 14:02:25,001 [INFO] [ENGINE] Launching infrastructure map execution against: 192.168.16.1/24
+2026-06-20 14:03:02,356 [INFO] [ENGINE] Launching infrastructure map execution against: 192.168.35.1
+2026-06-20 14:03:03,013 [INFO] [ENGINE] Launching infrastructure map execution against: 192.168.35.1
+2026-06-20 14:03:03,198 [INFO] [ENGINE] Launching infrastructure map execution against: 192.168.35.1
+2026-06-20 14:03:03,556 [INFO] [ENGINE] Launching infrastructure map execution against: 192.168.35.1
+2026-06-20 14:03:09,315 [INFO] [ENGINE] Launching infrastructure map execution against: 192.168.35.1/24
+2026-06-20 14:06:51,340 [INFO] [ENGINE] Launching infrastructure map execution against: 192.168.35.1
+2026-06-20 14:06:52,006 [INFO] [ENGINE] Launching infrastructure map execution against: 192.168.35.1
+2026-06-20 14:06:52,780 [INFO] [ENGINE] Launching infrastructure map execution against: 192.168.35.1
+2026-06-20 14:06:52,998 [INFO] [ENGINE] Launching infrastructure map execution against: 192.168.35.1
+2026-06-20 14:06:54,474 [INFO] [ENGINE] Launching infrastructure map execution against: 192.168.35.1
+2026-06-20 14:07:09,753 [INFO] [ENGINE] Launching infrastructure map execution against: 192.168.16.1
+2026-06-20 14:07:39,607 [INFO] [ENGINE] Launching infrastructure map execution against: 10.3.2.251/20
+2026-06-20 14:09:17,642 [INFO] [ENGINE] Launching infrastructure map execution against: 10.3.3.137/20
+2026-06-20 14:12:12,314 [INFO] [ENGINE] Launching infrastructure map execution against: 192.168.1.0/24
+2026-06-20 14:12:29,442 [INFO] [ENGINE] Launching infrastructure map execution against: 192.168.16.1
+2026-06-20 14:12:30,956 [INFO] [ENGINE] Launching infrastructure map execution against: 192.168.16.1
+2026-06-20 14:12:31,916 [INFO] [ENGINE] Launching infrastructure map execution against: 192.168.16.1
+2026-06-20 14:12:36,868 [INFO] [ENGINE] Launching infrastructure map execution against: 192.168.16.1/20
+2026-06-20 14:13:08,775 [INFO] [ENGINE] Launching infrastructure map execution against: 10.3.3.137/20
+2026-06-20 14:20:58,852 [INFO] [ENGINE] Launching infrastructure map execution against: 10.3.3.137/20
+2026-06-20 14:22:13,248 [INFO] [ENGINE] Launching infrastructure map execution against: 112.196.22.36
+2026-06-20 14:22:39,088 [INFO] [ENGINE] Launching infrastructure map execution against: 112.196.22.36
+2026-06-20 14:22:39,698 [INFO] [ENGINE] Launching infrastructure map execution against: 112.196.22.36
+2026-06-20 14:22:39,916 [INFO] [ENGINE] Launching infrastructure map execution against: 112.196.22.36
+2026-06-20 14:22:40,227 [INFO] [ENGINE] Launching infrastructure map execution against: 112.196.22.36
+2026-06-20 14:22:51,779 [INFO] [ENGINE] Launching infrastructure map execution against: 112.196.22.36
+2026-06-20 14:22:52,389 [INFO] [ENGINE] Launching infrastructure map execution against: 112.196.22.36
+2026-06-20 14:22:52,723 [INFO] [ENGINE] Launching infrastructure map execution against: 112.196.22.36
+2026-06-20 14:22:52,899 [INFO] [ENGINE] Launching infrastructure map execution against: 112.196.22.36
+2026-06-20 14:22:53,197 [INFO] [ENGINE] Launching infrastructure map execution against: 112.196.22.36
+2026-06-29 14:14:47,434 [INFO] [ENGINE] Launching infrastructure map execution against: 192.168.1.0/24
+2026-06-29 14:18:04,923 [INFO] [ENGINE] Launching infrastructure map execution against: 192.168.1.0/24
+2026-07-02 19:30:51,923 [INFO] [ENGINE] Launching infrastructure map execution against: 112.168.16.1
+2026-07-02 19:31:23,195 [INFO] [ENGINE] Launching infrastructure map execution against: 3.111158.165
+2026-07-02 19:31:24,351 [INFO] [ENGINE] Launching infrastructure map execution against: 3.111158.165
+2026-07-02 19:31:24,740 [INFO] [ENGINE] Launching infrastructure map execution against: 3.111158.165
+2026-07-02 19:31:24,902 [INFO] [ENGINE] Launching infrastructure map execution against: 3.111158.165
+2026-07-02 19:31:25,066 [INFO] [ENGINE] Launching infrastructure map execution against: 3.111158.165
+2026-07-02 19:31:25,230 [INFO] [ENGINE] Launching infrastructure map execution against: 3.111158.165
+2026-07-02 19:31:25,705 [INFO] [ENGINE] Launching infrastructure map execution against: 3.111158.165
+2026-07-02 19:31:25,928 [INFO] [ENGINE] Launching infrastructure map execution against: 3.111158.165
+2026-07-02 19:31:26,110 [INFO] [ENGINE] Launching infrastructure map execution against: 3.111158.165
+2026-07-02 19:31:26,287 [INFO] [ENGINE] Launching infrastructure map execution against: 3.111158.165
+2026-07-02 19:31:26,462 [INFO] [ENGINE] Launching infrastructure map execution against: 3.111158.165
+2026-07-02 19:31:26,728 [INFO] [ENGINE] Launching infrastructure map execution against: 3.111158.165
+2026-07-02 19:31:26,944 [INFO] [ENGINE] Launching infrastructure map execution against: 3.111158.165
+2026-07-02 19:31:27,140 [INFO] [ENGINE] Launching infrastructure map execution against: 3.111158.165
+2026-07-02 19:31:27,315 [INFO] [ENGINE] Launching infrastructure map execution against: 3.111158.165
+2026-07-02 19:31:32,094 [INFO] [ENGINE] Launching infrastructure map execution against: 3.111158.165
+2026-07-02 19:31:35,221 [INFO] [ENGINE] Launching infrastructure map execution against: 192.168.1.0/24
